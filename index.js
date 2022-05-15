@@ -1,16 +1,23 @@
-const express = require("express");
-const messagesRouter = require("./routers/messagesRouter");
+const express = require('express');
+const cors = require('cors');
 const bodyParser = require("body-parser");
+const messagesRouter = require('./router/messagesRouter');
+const utilsRouter = require('./router/utilsRouter');
 
 const app = express();
-app.use(bodyParser.json()); 
+app.use(cors());
 
+
+app.use(bodyParser.json()); 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/messages', messagesRouter); 
 
-const port = 8080;
+app.use("/messages", messagesRouter);
+app.use("/utils", utilsRouter);
+
+const port = process.env.PORT || 8080;
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`);
+    console.log(`Cloud computing app listening on port ${port}!`)
 });
